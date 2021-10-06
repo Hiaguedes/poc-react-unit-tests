@@ -1,8 +1,8 @@
 import {GlobalStyle} from './styles/globalStyle'
 import {Provider} from 'react-redux';
 import store from './redux-store/store'
-import MainLayout from './components/MainLayout/mainLayout.page'
-import {Router} from 'react-router-dom'
+import MainLayout from './modules/Layout/MainLayout'
+import {Router, BrowserRouter} from 'react-router-dom'
 import { createBrowserHistory } from "history";
 
 function App() {
@@ -12,7 +12,9 @@ function App() {
       <Provider store={store}>
         <GlobalStyle />
         <Router history={history}>
-          <MainLayout />
+          <BrowserRouter>
+            <MainLayout />
+          </BrowserRouter>
         </Router>
       </Provider>
     </>

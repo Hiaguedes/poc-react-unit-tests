@@ -1,6 +1,6 @@
 import React from 'react'
 import {Wrapper, MenuLinksWrapper} from './sidebar.styles'
-import {RootRoutes} from '../../routes'
+import {RootRoutes} from '../../modules/Layout/routes'
 import {Link} from 'react-router-dom'
 import {useTypedSelector} from '../../redux-store/useTypedSelector';
 import {toogleSidebarOpen} from './sidebar.slice'
