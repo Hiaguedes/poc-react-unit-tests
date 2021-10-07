@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from '../../../components/Sidebar/sidebar.component'
 import GlobalRoutes from '../routes'
-import {Wrapper, Main} from './mainLayout.styles'
+import {Wrapper, Main} from './appLayout.styles'
 
 const MainLayout = () => {
 

@@ -1,5 +1,5 @@
 import LoginLayout from "../LoginLayout/loginLayout.page"
-import AppRoute from '../AppLayout/mainLayout.page';
+import AppRoute from '../AppLayout/appLayout.page';
 
 
 const MainLayout = () => {
