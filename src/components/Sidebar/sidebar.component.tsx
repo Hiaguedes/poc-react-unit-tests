@@ -5,11 +5,13 @@ import {Link} from 'react-router-dom'
 import {useTypedSelector} from '../../redux-store/useTypedSelector';
 import {toogleSidebarOpen} from './sidebar.slice'
 import { useDispatch } from 'react-redux';
+import {useAuth} from '../../modules/Login/hooks/useAuth'
 
 
 const Sidebar = () => {
     const dispatch = useDispatch();
-    const sidebarOpen = useTypedSelector(state => state.sidebar.open)
+    const sidebarOpen = useTypedSelector(state => state.sidebar.open);
+    const {handleLogout} = useAuth();
     return (
         <Wrapper isOpen={sidebarOpen}>
             {!sidebarOpen ? (
@@ -26,6 +28,7 @@ const Sidebar = () => {
                         </Link>
                     ))
                     }
+                <button onClick={handleLogout}>Logout</button>
                 </MenuLinksWrapper>
 
             )}

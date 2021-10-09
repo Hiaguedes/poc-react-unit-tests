@@ -9,6 +9,7 @@ interface AuthContextProps {
     user: User;
     handleLogin: (user: User) => void;
     isLogged: boolean;
+    handleLogout: () => void;
 }
 
 const initialState = {
@@ -27,8 +28,13 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
         setIsLogged(true);
     }
 
+    const handleLogout = () => {
+        setUser(user);
+        setIsLogged(false);
+    }
+
     return (
-        <AuthContext.Provider value={{user, handleLogin, isLogged}}>
+        <AuthContext.Provider value={{user, handleLogin, isLogged, handleLogout}}>
             {children}
         </AuthContext.Provider>
     )
