@@ -1,10 +1,11 @@
 import LoginLayout from "../LoginLayout/loginLayout.page"
-import AppRoute from '../AppLayout/appLayout.page';
-
+import AppLayout from '../AppLayout/appLayout.page';
+import { useAuth } from "../../Login/hooks/useAuth";
 
 const MainLayout = () => {
+    const {isLogged} = useAuth();
     return (
-        true ? <LoginLayout /> : <AppRoute />
+        isLogged ? <AppLayout /> : <LoginLayout />
     )
 }
 

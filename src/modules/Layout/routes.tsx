@@ -1,5 +1,6 @@
 import AppRoutes from './app.routes';
 import LoginRoutes from '../Login/login.routes';
+import { useAuth } from '../Login/hooks/useAuth';
 
 export const RootRoutes = {
     Home:'/',
@@ -8,8 +9,10 @@ export const RootRoutes = {
 
 const GlobalRoutes = () => {
 
+    const {isLogged} = useAuth();
+
     return (
-        true ? <LoginRoutes /> :<AppRoutes />   
+        isLogged ? <AppRoutes /> :<LoginRoutes />   
     );
 }
 

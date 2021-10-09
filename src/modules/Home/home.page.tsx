@@ -1,9 +1,10 @@
 import React from 'react'
-
+import { useAuth } from '../Login/hooks/useAuth'
 const HomePage = () => {
+    const {user} = useAuth()
     return (
         <div>
-            Home
+            <p>Bem Vindo/a {user.name}</p>
         </div>
     )
 }
