@@ -1,4 +1,4 @@
-import {useContext, ReactNode, createContext, useState} from 'react'
+import {useContext, ReactNode, createContext, useState, useEffect} from 'react'
 
 export interface User {
     id: string;
@@ -12,6 +12,10 @@ interface AuthContextProps {
     handleLogout: () => void;
 }
 
+interface UserStoraged extends User {
+    isLogged: boolean;
+}
+
 const initialState = {
 
 } as AuthContextProps;
@@ -23,14 +27,28 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     const [user, setUser] = useState<User>({} as User);
     const [isLogged, setIsLogged] = useState(false);
 
+    const localStorageKey = 'poc-testes/user-login'
+
+    useEffect(() => {
+        const dataStoraged = localStorage.getItem(localStorageKey);
+        if(dataStoraged){
+            const response = JSON.parse(dataStoraged) as UserStoraged;
+
+            setIsLogged(response.isLogged);
+            setUser({name: response.name, id: response.id})
+        }
+    }, [])
+
     const handleLogin = (user: User) => {
         setUser(user);
         setIsLogged(true);
+        localStorage.setItem(localStorageKey, JSON.stringify({...user, isLogged: true}))
     }
 
     const handleLogout = () => {
         setUser(user);
         setIsLogged(false);
+        localStorage.removeItem(localStorageKey);
     }
 
     return (
