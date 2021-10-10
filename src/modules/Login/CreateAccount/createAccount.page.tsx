@@ -1,48 +1,16 @@
 import {useState, useEffect} from 'react'
 import {Styles} from './ceateAccount.styles'
 import Input from '../../../components/Input/input.component';
+import {NewUserModal} from '../ResponseNewUser/responseNewUser.modal'
 
 const CreateAccount = () => {
     const {Wrapper, Title, InputWrapper, LoginHome} = Styles;
+    const [showModal, setShowModal] = useState(false);
 
     const [createdData, setCreatedData] = useState({
         name: '',
         password: '',
     })
-
-//     const query = `
-//     query allUsers{
-//         allUsers{
-//           id
-//           name
-//           password
-//         }
-//       }`;
-
-// const handleAllUsers = async () => {
-//     await fetch('http://localhost:4000/', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'Accept': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           query,
-//         })
-//       })
-//         .then(r => r.json())
-//         .then(data => console.log('data returned:', data));
-//     }
-
-//     useEffect(() => {
-//         const request = async () => {
-//             await handleAllUsers();
-
-//         }
-
-//         request();
-
-//     }, [])
 
 const mutation = `mutation createUser($name: String!, $password: String!) {
     createUser(name: $name, password: $password) {
@@ -68,10 +36,18 @@ const handleCreateNewUser = async () => {
       })
     .then(r => r.json())
     .then(data => console.log('data returned:', data));
+
+
+    setCreatedData({
+        name: '',
+        password: '',
+    })
+    setShowModal(true)
 }
 
     return (
         <Wrapper>
+            {showModal && <NewUserModal setModalOpen={setShowModal}/>}
             <Title>Cadastrar novo usuário</Title>
             <InputWrapper>
                 <Input 
