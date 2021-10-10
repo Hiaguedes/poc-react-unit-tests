@@ -17,8 +17,9 @@ interface UserStoraged extends User {
 }
 
 const initialState = {
-
+    
 } as AuthContextProps;
+export const localStorageKey = 'poc-testes/user-login'
 
 const AuthContext = createContext<AuthContextProps>(initialState);
 
@@ -27,7 +28,6 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     const [user, setUser] = useState<User>({} as User);
     const [isLogged, setIsLogged] = useState(false);
 
-    const localStorageKey = 'poc-testes/user-login'
 
     useEffect(() => {
         const dataStoraged = localStorage.getItem(localStorageKey);
