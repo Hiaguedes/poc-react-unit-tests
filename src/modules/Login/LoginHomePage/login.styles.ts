@@ -46,4 +46,8 @@ const CreateAccountLink = styled(Link)`
     
 `
 
-export {Wrapper, LoginBox, Title, InputWrapper, CreateAccountLink}
+const ErrorMessage = styled.p`
+    color: red;
+`
+
+export {Wrapper, LoginBox, Title, InputWrapper, CreateAccountLink, ErrorMessage}
