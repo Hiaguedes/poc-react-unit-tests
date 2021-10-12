@@ -47,7 +47,7 @@ const CreateAccountLink = styled(Link)`
 `
 
 const ErrorMessage = styled.p`
-    color: red;
+    color: ${({theme}) => theme.error};
 `
 
 export {Wrapper, LoginBox, Title, InputWrapper, CreateAccountLink, ErrorMessage}
