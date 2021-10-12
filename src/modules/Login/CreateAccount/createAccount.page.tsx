@@ -51,18 +51,20 @@ const handleCreateNewUser = async () => {
             <Title>Cadastrar novo usuário</Title>
             <InputWrapper>
                 <Input 
+                    data-testid="nomeInput"
                     value={createdData.name} 
                     onChange={({target}) => setCreatedData(prevValue => ({...prevValue, name: target.value}))} 
                     placeholder="Nome do novo usuário"
                 />
                 <Input 
+                    data-testid="senhaInput"
                     value={createdData.password} 
                     placeholder="Senha do novo usuário"
                     onChange={({target}) => setCreatedData(prevValue => ({...prevValue, password: target.value}))} 
                 />
             </InputWrapper>
-            <button onClick={handleCreateNewUser}>Criar Conta</button>
-            <LoginHome to="/login">Voltar para a página de login</LoginHome>
+            <button data-testid="criarContaButao" onClick={handleCreateNewUser}>Criar Conta</button>
+            <LoginHome data-testid="botaoVoltar" to="/login">Voltar para a página de login</LoginHome>
         </Wrapper>
     )
 }

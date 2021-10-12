@@ -1,10 +1,10 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 
 interface SidebarState {
     open: boolean;
 }
 
-const initialState : SidebarState = {
+export const initialState : SidebarState = {
     open: true,
 };
 

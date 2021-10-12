@@ -18,7 +18,7 @@ const NewUserModalResponse = ({setModalOpen}: ModalProps) => {
     return (
         <>
         <BlackBackground />
-        <Wrapper>
+        <Wrapper data-testid="modalNovoUsuario">
             <ContentContainer>
                 <ModalWrapper>
                     <h1>Usuário Criado</h1>

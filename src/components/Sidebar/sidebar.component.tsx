@@ -13,13 +13,13 @@ const Sidebar = () => {
     const sidebarOpen = useTypedSelector(state => state.sidebar.open);
     const {handleLogout} = useAuth();
     return (
-        <Wrapper isOpen={sidebarOpen}>
+        <Wrapper data-testid="wrapper" isOpen={sidebarOpen}>
             {!sidebarOpen ? (
-                <button onClick={() => dispatch(toogleSidebarOpen())}>T</button>
+                <button data-testid="botaoToogle" onClick={() => dispatch(toogleSidebarOpen())}>T</button>
             ) : (
                 
                 <MenuLinksWrapper>
-                <button onClick={() => dispatch(toogleSidebarOpen())}>Toogle</button>
+                <button data-testid="botaoToogle" onClick={() => dispatch(toogleSidebarOpen())}>Toogle</button>
                 {Object
                     .entries(RootRoutes)
                     .map(([route, link]) => (

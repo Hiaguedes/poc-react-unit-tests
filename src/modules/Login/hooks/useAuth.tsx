@@ -21,7 +21,7 @@ const initialState = {
 } as AuthContextProps;
 export const localStorageKey = 'poc-testes/user-login'
 
-const AuthContext = createContext<AuthContextProps>(initialState);
+export const AuthContext = createContext<AuthContextProps>(initialState);
 
 export const AuthProvider = ({children}: {children: ReactNode}) => {
     

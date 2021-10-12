@@ -83,7 +83,7 @@ const handleAllUsers = async () => {
                     placeholder="Senha" 
                     />
                 </InputWrapper>
-                <button onClick={handleUserLogin}>Login</button>
+                <button data-testid="loginButton" onClick={handleUserLogin}>Login</button>
                 <CreateAccountLink to="/login/criar-conta">
                     Criar Conta
                 </CreateAccountLink>
