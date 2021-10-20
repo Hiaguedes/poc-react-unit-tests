@@ -13,6 +13,7 @@ global.fetch = jest.fn(() =>
 ) as any;
 
 describe('Testes para a página createAccount',  () => {
+
     test('Digitando usuário e senha eu tenho uma modal de confirmação', async () => {
 
         const {getByTestId, rerender} = render(<CreateAccountPage />, {wrapper: BrowserRouter})
@@ -57,7 +58,7 @@ describe('Testes para a página createAccount',  () => {
         fireEvent.change(nomeInput, {target: {value: 'Usuário Teste'}})
         rerender(<CreateAccountPage />)
         fireEvent.change(senhaInput, {target: {value: '101010'}})
-        debug()
+        // debug()
         fireEvent.click(criarContaButao);
 
         await waitFor(() => {

@@ -10,8 +10,8 @@ const AppRoutes = () => {
 return(
   <Switch>
     <Redirect exact from="/login/*" to={`${RootRoutes.Home}`} />
-    <Route exact component={HomePage} path={`${RootRoutes.Home}`} />
-    <Route component={PaymentsPage} path={`${RootRoutes.Pagamento}`} />
+    <Route data-testid="rota-home" exact component={HomePage} path={`${RootRoutes.Home}`} />
+    <Route data-testid="rota-pagamento" component={PaymentsPage} path={`${RootRoutes.Pagamento}`} />
     <Route path="*" component={() => <Redirect exact from="/" to={`${RootRoutes.Home}`} />} />
   </Switch>  
 )

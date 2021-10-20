@@ -23,7 +23,7 @@ const Sidebar = () => {
                 {Object
                     .entries(RootRoutes)
                     .map(([route, link]) => (
-                        <Link key={link} to={{pathname: link}}>
+                        <Link data-testid={link} key={link} to={{pathname: link}}>
                             {route}
                         </Link>
                     ))

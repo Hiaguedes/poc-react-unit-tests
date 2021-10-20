@@ -1,7 +1,9 @@
 import { render, fireEvent, waitFor, screen, act } from '@testing-library/react'
 import LoginUser from './login.page'
+import App from '../../../App'
 import {BrowserRouter} from 'react-router-dom'
 import {useAuth} from '../hooks/useAuth'
+import MainLayout from '../../Layout/MainLayout'
 
 global.fetch = jest.fn(() => 
     Promise.resolve(
@@ -18,6 +20,19 @@ global.fetch = jest.fn(() =>
         }
     )
 ) as any;
+
+/*
+jest.mock('node-fetch', () => {
+    return jest.fn((url) => {
+        // Get and parse the URL parameter.
+        const value = parseInt(url.split('/').slice(-1)[0], 10);
+
+        return Promise.resolve({
+            json: () => ({ importantData: value > 100 ? 1000 : value })
+        });
+    });
+});
+*/
 
 const mockedHandleLogin = jest.fn();
 
@@ -67,8 +82,8 @@ describe('Testes da home de login', () => {
 
     test('Se usuário for encontrado entao a funcao handleLogin tem que ser chamada', async() => {
         const {getByTestId, debug, rerender} = render(
-                <LoginUser /> ,
-        {wrapper: BrowserRouter});
+                <MainLayout />,
+                {wrapper: BrowserRouter});
 
         const inputUsuario = getByTestId('inputUsuario') as HTMLInputElement;
         const inputSenha = getByTestId('inputSenha') as HTMLInputElement;
@@ -79,7 +94,7 @@ describe('Testes da home de login', () => {
 
         })
 
-        rerender(<LoginUser />)
+        rerender(<MainLayout />)
 
         act(() => {
             fireEvent.change(inputSenha, {target: {value: '123456'}});
@@ -91,7 +106,16 @@ describe('Testes da home de login', () => {
         })
         fireEvent.click(loginButton);
 
+        rerender(<MainLayout />)
+
+
+        // debug()
+
         expect(mockedHandleLogin).toHaveBeenCalled()
+
+        await waitFor(() => {
+            expect(screen.getByText(/Hiago/i)).toBeTruthy()
+        })
 
     })
 })

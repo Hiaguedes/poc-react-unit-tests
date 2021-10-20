@@ -2,17 +2,18 @@ import {useEffect, useState, useCallback} from 'react'
 import {LoginBox, Wrapper, Title, InputWrapper, CreateAccountLink, ErrorMessage} from './login.styles'
 import Input from '../../../components/Input/input.component'
 import {useAuth} from '../hooks/useAuth'
+import {gql, useQuery} from '@apollo/client';
+
+const GET_SOMETHING = gql`
+    query getSomething {
+        id
+    }
+`
 interface User {
     id: string;
     name: string;
     password: string;
 }
-
-// interface DataResponse {
-//     data: {
-//         allUsers: User[];
-//     }
-// }
 
 const LoginPage = () => {
 
@@ -23,6 +24,14 @@ const [loginUser, setLoginUser] = useState({
     name: '',
     password: ''
 })
+
+const {data, loading} = useQuery(GET_SOMETHING);
+
+useEffect(() => {
+    if(data){
+        console.log(data)
+    }
+}, [data])
 
 const query = `
     query allUsers{
