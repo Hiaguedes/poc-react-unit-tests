@@ -8,6 +8,9 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "concurrently": "^6.3.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
     "graphql": "^15.6.1",
     "history": "^5.0.1",
     "react": "^17.0.2",
@@ -21,11 +24,13 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "server": "json-graphql-server graphql-server.ts --p 4000",
+    "start:react": "react-scripts start",
+    "start": "concurrently \"npm run server\" \"npm run start:react\"",
+    "start:test": "cross-env REACT_APP_ENV=\"test\" react-scripts start",
+    "test": "cross-env REACT_APP_ENV=test jest --watchAll",
     "build": "react-scripts build",
-    "test": "jest --watchAll",
-    "eject": "react-scripts eject",
-    "server": "json-graphql-server graphql-server.ts --p 4000"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

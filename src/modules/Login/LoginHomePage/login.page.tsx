@@ -2,13 +2,9 @@ import {useEffect, useState, useCallback} from 'react'
 import {LoginBox, Wrapper, Title, InputWrapper, CreateAccountLink, ErrorMessage} from './login.styles'
 import Input from '../../../components/Input/input.component'
 import {useAuth} from '../hooks/useAuth'
-import {gql, useQuery} from '@apollo/client';
-
-const GET_SOMETHING = gql`
-    query getSomething {
-        id
-    }
-`
+import {useQuery} from '@apollo/client';
+import {ALL_USERS} from './graphql';
+import {AllUsersResponse} from '../graphql.mock'
 interface User {
     id: string;
     name: string;
@@ -25,55 +21,55 @@ const [loginUser, setLoginUser] = useState({
     password: ''
 })
 
-const {data, loading} = useQuery(GET_SOMETHING);
+const {data} = useQuery<AllUsersResponse, any>(ALL_USERS);
 
 useEffect(() => {
     if(data){
-        console.log(data)
+        setAllUsers([data.allUsers])
     }
 }, [data])
 
-const query = `
-    query allUsers{
-        allUsers{
-          id
-          name
-          password
-        }
-      }`;
+// const query = `
+//     query allUsers{
+//         allUsers{
+//           id
+//           name
+//           password
+//         }
+//       }`;
 
-const handleAllUsers = async () => {
+// const handleAllUsers = async () => {
 
-    const response = await fetch('http://localhost:4000/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          query,
-        })
-      })
-        .then(r => r.json())
-        .then((data) => {
-            console.log('data q retorna para allUsers', data.data.allUsers)
-            return data;
-        } )
+//     const response = await fetch('http://localhost:4000/', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'Accept': 'application/json',
+//         },
+//         body: JSON.stringify({
+//           query,
+//         })
+//       })
+//         .then(r => r.json())
+//         .then((data) => {
+//             console.log('data q retorna para allUsers', data.data.allUsers)
+//             return data;
+//         } )
 
-        return response
-    }
+//         return response
+//     }
 
-    useEffect(() => {
-        const request = async () => {
-            await handleAllUsers()
-                .then((data: any) => {
-                setAllUsers(data.data.allUsers)
-            });;
-        }
+//     useEffect(() => {
+//         const request = async () => {
+//             await handleAllUsers()
+//                 .then((data: any) => {
+//                 setAllUsers([data.data.allUsers])
+//             });;
+//         }
 
-        request()
+//         request()
 
-    }, [])
+//     }, [])
 
     const handleUserLogin = useCallback(() => {
         const hasUserInDB = allUsers.filter(user => user.name === loginUser.name && user.password === loginUser.password);

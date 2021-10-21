@@ -1,19 +1,5 @@
-import {graphql} from 'msw'
-
-interface Response {
-    getSomething: {
-        id: number;
-    }
-}
+import {loadingHandlers} from '../modules/Login/graphql.mock';
 
 export const handlers = [
-    graphql.query<Response, any>('getSomething', (req, res, ctx) => {
-        return res(
-            ctx.data({
-                getSomething: {
-                    id: 1
-                }
-            })
-        )
-    }),
+    ...loadingHandlers,
 ]

@@ -6,6 +6,8 @@ import '@testing-library/jest-dom';
 import "jest-styled-components";
 import { client } from './ApolloClient'
 import { server } from './msw-mock/server'
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env.test' });
 
 beforeAll(() => {
   // Enable the mocking in tests.

@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react'
 import {Styles} from './ceateAccount.styles'
 import Input from '../../../components/Input/input.component';
 import {NewUserModal} from '../ResponseNewUser/responseNewUser.modal'
+import { useMutation } from '@apollo/client';
+import {CREATE_ACCOUNT} from './graphql';
 
 const CreateAccount = () => {
     const {Wrapper, Title, InputWrapper, LoginHome} = Styles;
@@ -18,6 +20,28 @@ const mutation = `mutation createUser($name: String!, $password: String!) {
         password
     }
 }`
+
+const [mutationCreateUser] = useMutation<any, {name: string; password: string}>(CREATE_ACCOUNT)
+
+const handleMutation = async () => {
+    await mutationCreateUser({
+        variables: {
+            name: createdData.name,
+            password: createdData.password
+        }
+    })
+    .then(data => {
+        setCreatedData({
+            name: '',
+            password: '',
+        })
+        setShowModal(true)
+    })
+    .catch((e) => {
+        console.error(e)
+    })
+    ;
+}
 
 const handleCreateNewUser = async () => {
     await fetch('http://localhost:4000/', {
@@ -63,7 +87,7 @@ const handleCreateNewUser = async () => {
                     onChange={({target}) => setCreatedData(prevValue => ({...prevValue, password: target.value}))} 
                 />
             </InputWrapper>
-            <button data-testid="criarContaButao" onClick={handleCreateNewUser}>Criar Conta</button>
+            <button data-testid="criarContaButao" onClick={process.env.REACT_APP_ENV === 'test'? handleMutation : handleCreateNewUser}>Criar Conta</button>
             <LoginHome data-testid="botaoVoltar" to="/login">Voltar para a página de login</LoginHome>
         </Wrapper>
     )
